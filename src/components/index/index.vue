@@ -6,17 +6,18 @@
     <el-container>
       <el-aside width="200px">
         <el-menu
-          default-active="1-1"
           class="menu"
+          router
+          default-active="/goodsList"
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b">
-          <el-submenu index="1">
+          <el-submenu index="/goodsList">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>数据管理</span>
             </template>
-            <el-menu-item index="1-1">商品列表</el-menu-item>
+            <el-menu-item index="/goodsList">商品列表</el-menu-item>
             <el-menu-item index="1-2">商户列表</el-menu-item>
             <el-menu-item index="1-3">订单列表</el-menu-item>
           </el-submenu>
@@ -34,7 +35,11 @@
           </el-menu-item>
         </el-menu>
       </el-aside>
-      <el-main class="main">Main</el-main>
+      <el-main class="main">
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
+      </el-main>
     </el-container>
   </el-container>
 </template>
