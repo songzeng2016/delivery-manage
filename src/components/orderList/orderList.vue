@@ -6,7 +6,7 @@
       header-cell-class-name="table-header"
     >
       <el-table-column
-        label="名称"
+        label="id"
         prop="name">
       </el-table-column>
       <el-table-column
@@ -14,7 +14,7 @@
         prop="price">
       </el-table-column>
       <el-table-column
-        label="库存"
+        label="时间"
         prop="count">
       </el-table-column>
       <el-table-column label="操作" align="center">

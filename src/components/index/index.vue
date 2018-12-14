@@ -8,7 +8,7 @@
         <el-menu
           class="menu"
           router
-          default-active="/goodsList"
+          :default-active="defaultActive"
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b">
@@ -18,21 +18,19 @@
               <span>数据管理</span>
             </template>
             <el-menu-item index="/goodsList">商品列表</el-menu-item>
-            <el-menu-item index="1-2">商户列表</el-menu-item>
-            <el-menu-item index="1-3">订单列表</el-menu-item>
+            <el-menu-item index="/sellerList">商户列表</el-menu-item>
+            <el-menu-item index="/orderList">订单列表</el-menu-item>
+            <el-menu-item index="/orderList">配送员列表</el-menu-item>
           </el-submenu>
-          <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">添加数据</span>
-          </el-menu-item>
-          <el-menu-item index="3" disabled>
-            <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
-          </el-menu-item>
+          <el-submenu index="/addGoods">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>添加数据</span>
+            </template>
+            <el-menu-item index="/addGoods">添加商品</el-menu-item>
+            <el-menu-item index="/addSeller">添加商家</el-menu-item>
+            <el-menu-item index="/addSeller">添加配送员</el-menu-item>
+          </el-submenu>
         </el-menu>
       </el-aside>
       <el-main class="main">
@@ -50,6 +48,11 @@
   export default {
     components: {
       VHeader,
+    },
+    data() {
+      return {
+        defaultActive: this.$route.path,
+      };
     },
   };
 </script>

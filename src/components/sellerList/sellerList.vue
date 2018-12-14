@@ -10,11 +10,11 @@
         prop="name">
       </el-table-column>
       <el-table-column
-        label="价格"
+        label="地址"
         prop="price">
       </el-table-column>
       <el-table-column
-        label="库存"
+        label="介绍"
         prop="count">
       </el-table-column>
       <el-table-column label="操作" align="center">
