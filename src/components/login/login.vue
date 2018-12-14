@@ -40,7 +40,7 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             console.log(this.form);
-            this.$router.replace('/index');
+            this.$router.replace('/goodsList');
           } else {
             console.log('error submit!!');
             return false;
