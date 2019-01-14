@@ -3,11 +3,11 @@ import Router from 'vue-router';
 
 import Login from 'components/login/login';
 const Index = () => import('components/index/index');
-const goodsList = () => import('components/goodsList/goodsList');
-const sellerList = () => import('components/sellerList/sellerList');
-const orderList = () => import('components/orderList/orderList');
-const addGoods = () => import('components/addGoods/addGoods');
-const addSeller = () => import('components/addSeller/addSeller');
+const goodsList = () => import('components/index/goodsList/goodsList');
+const sellerList = () => import('components/index/sellerList/sellerList');
+const orderList = () => import('components/index/orderList/orderList');
+const addGoods = () => import('components/index/addGoods/addGoods');
+const addSeller = () => import('components/index/addSeller/addSeller');
 
 Vue.use(Router);
 
@@ -15,6 +15,10 @@ export default new Router({
   routes: [
     {
       path: '/',
+      component: Login,
+    },
+    {
+      path: '/login',
       component: Login,
     },
     {
