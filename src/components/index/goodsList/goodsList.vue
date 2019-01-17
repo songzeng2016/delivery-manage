@@ -94,6 +94,9 @@
         }
       };
     },
+    created() {
+      this.getList();
+    },
     watch: {
       showEdit(value) {
         // 清空校验结果
@@ -101,6 +104,13 @@
       },
     },
     methods: {
+      // 获取列表
+      getList() {
+        this.$get('/goods/getList', {})
+          .then(json => {
+            console.log(json);
+          });
+      },
       // 编辑
       handleEdit(row, index) {
         row.index = index;
