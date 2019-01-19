@@ -20,14 +20,16 @@
       <el-form-item label="图片">
         <el-upload
           class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/">
-          <!--<img v-if="imageUrl" :src="imageUrl" class="avatar">-->
-          <!--<i v-else class="el-icon-plus avatar-uploader-icon"></i>-->
-          <i class="el-icon-plus avatar-uploader-icon"></i>
+          action=""
+          :auto-upload="false"
+          :show-file-list="false"
+          :on-change="onChange">
+          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
       </el-form-item>
       <el-form-item>
-        <el-button size="medium" type="primary">确定添加</el-button>
+        <el-button size="medium" type="primary" @click="submitForm('form')">确定添加</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -37,10 +39,12 @@
   export default {
     data() {
       return {
+        imageUrl: '',
         form: {
           name: '',
           price: '',
           count: '',
+          file: '',
         },
         rules: {
           name: [
@@ -54,6 +58,30 @@
           ],
         }
       };
+    },
+    methods: {
+      onChange(file, fileList) {
+        this.form.file = file.raw;
+        this.imageUrl = URL.createObjectURL(file.raw);
+      },
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            const formData = new FormData();
+            for (let key in this.form) {
+              formData.append(key, this.form[key]);
+            }
+
+            this.$post('/goods/add', formData, 'FormData')
+              .then(json => {
+
+              });
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
     },
   };
 </script>
