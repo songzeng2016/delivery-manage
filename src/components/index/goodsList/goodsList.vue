@@ -62,23 +62,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Mock from 'mockjs';
-
-  const data = Mock.mock({
-    // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
-    'list|1-50': [{
-      // 属性 id 是一个自增数，起始值为 1，每次增 1
-      'id|+1': 1,
-      'name|1': 'name',
-      'price|+8': 10,
-      'count|+2': 0,
-    }]
-  });
-
   export default {
     data() {
       return {
-        list: data.list,
+        list: [],
         showEdit: false,
         editData: {},
         editRules: {
@@ -106,9 +93,14 @@
     methods: {
       // 获取列表
       getList() {
-        this.$get('/goods/getList', {})
+        const reqData = {
+          pageNum: 1,
+          pageSize: 100,
+        };
+        this.$post('/goods/getList', reqData)
           .then(json => {
             console.log(json);
+            this.list = json.data.list;
           });
       },
       // 编辑
@@ -124,12 +116,11 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
-          this.list.splice(index, 1);
-          console.log(id);
+          this.$post('/goods/delete', this.list[index])
+            .then(json => {
+              this.$message();
+              this.list.splice(index, 1);
+            });
         }).catch(() => {
 
         });
@@ -138,9 +129,13 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            const {index} = this.editData;
-            this.list.splice(index, 1, this.editData);
-            this.showEdit = false;
+            this.$post('/goods/edit', this.editData)
+              .then(json => {
+                const {index} = this.editData;
+                this.list.splice(index, 1, this.editData);
+                this.showEdit = false;
+                this.$message();
+              });
           }
         });
       },

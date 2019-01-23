@@ -74,7 +74,8 @@
 
             this.$post('/goods/add', formData, 'FormData')
               .then(json => {
-
+                this.$message();
+                this.$refs[formName].resetFields();
               });
           } else {
             console.log('error submit!!');
@@ -94,9 +95,11 @@
     position: relative;
     overflow: hidden;
   }
+
   .avatar-uploader .el-upload:hover {
     border-color: #409EFF;
   }
+
   .avatar-uploader-icon {
     font-size: 28px;
     color: #8c939d;
@@ -105,6 +108,7 @@
     line-height: 178px;
     text-align: center;
   }
+
   .avatar {
     width: 178px;
     height: 178px;
@@ -123,7 +127,7 @@
       padding: 10px 10px 0
       border: 1px solid #eaeefb
       &:hover
-        box-shadow: 0 0 8px 0 rgba(232,237,250,.6), 0 2px 4px 0 rgba(232,237,250,.5)
+        box-shadow: 0 0 8px 0 rgba(232, 237, 250, .6), 0 2px 4px 0 rgba(232, 237, 250, .5)
         border-radius: 6px
         transition: all .4s
 </style>

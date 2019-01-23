@@ -34,9 +34,9 @@
         </el-menu>
       </el-aside>
       <el-main class="main">
-        <keep-alive>
+        <!--<keep-alive>-->
           <router-view></router-view>
-        </keep-alive>
+        <!--</keep-alive>-->
       </el-main>
     </el-container>
   </el-container>

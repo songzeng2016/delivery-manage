@@ -14,7 +14,7 @@ module.exports = {
   // 修改的配置
   devServer: {
     // proxy: 'https://xiaoce-timeline-api-ms.juejin.im',  // 统一配置
-    proxy: 'http://127.0.0.1:8080', // 统一配置
+    proxy: 'http://127.0.0.1:3000', // 统一配置
     // proxy: {
     //   // '^/books': {
     //   //   target: 'https://xiaoce-timeline-api-ms.juejin.im',

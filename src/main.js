@@ -7,12 +7,20 @@ import axios from './axios';
 
 import 'common/stylus/index.styl';
 
+Vue.use(ElementUI);
+
 Vue.config.productionTip = false;
 
 Vue.prototype.$get = axios.$get;
 Vue.prototype.$post = axios.$post;
 
-Vue.use(ElementUI);
+Vue.prototype.$message = (message = '操作成功', type = 'success', showClose = true) => {
+  ElementUI.Message({
+    showClose,
+    message,
+    type,
+  });
+};
 
 new Vue({
   router,
