@@ -1,12 +1,18 @@
 import axios from 'axios';
 import qs from 'qs';
+import {Message} from 'element-ui';
 
 // axios 响应拦截器
 axios.interceptors.response.use(res => {
   if (res.data.code === '200') {
     return res.data;
   } else {
-    return Promise.reject(new Error(res.msg || '请求错误'));
+    Message({
+      showClose: true,
+      message: res.data.msg || '请求错误',
+      type: 'error'
+    });
+    return Promise.reject(new Error(res.data.msg || '请求错误'));
   }
 });
 

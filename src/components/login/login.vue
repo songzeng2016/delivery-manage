@@ -27,10 +27,10 @@
         },
         rules: {
           account: [
-            { required: true, message: '请输入用户名', trigger: 'blur' },
+            {required: true, message: '请输入用户名', trigger: 'blur'},
           ],
           password: [
-            { required: true, message: '请输入密码', trigger: 'blur' },
+            {required: true, message: '请输入密码', trigger: 'blur'},
           ],
         },
       };
@@ -39,8 +39,13 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            console.log(this.form);
-            this.$router.replace('/goodsList');
+            const reqData = {
+              ...this.form,
+            };
+            this.$post('/mange/login', reqData)
+              .then(json => {
+                this.$router.replace('/goodsList');
+              });
           } else {
             console.log('error submit!!');
             return false;

@@ -17,7 +17,9 @@
   export default {
     methods: {
       logout() {
-        this.$router.replace('/login');
+        this.$post('/mange/logout').then(json => {
+          this.$router.replace('/login');
+        });
       },
     },
   };
