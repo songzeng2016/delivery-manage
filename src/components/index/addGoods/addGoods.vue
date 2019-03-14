@@ -17,6 +17,9 @@
       <el-form-item label="库存" prop="count">
         <el-input-number :min="0" v-model="form.count"></el-input-number>
       </el-form-item>
+      <el-form-item label="描述" prop="desc">
+        <el-input type="textarea" v-model="form.desc"></el-input>
+      </el-form-item>
       <el-form-item label="图片">
         <el-upload
           class="avatar-uploader"

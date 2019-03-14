@@ -6,16 +6,16 @@
       header-cell-class-name="table-header"
     >
       <el-table-column
-        label="名称"
-        prop="name">
+        label="用户名"
+        prop="account">
+      </el-table-column>
+      <el-table-column
+        label="密码"
+        prop="password">
       </el-table-column>
       <el-table-column
         label="地址"
-        prop="price">
-      </el-table-column>
-      <el-table-column
-        label="介绍"
-        prop="count">
+        prop="address">
       </el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
@@ -62,23 +62,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import Mock from 'mockjs';
-
-  const data = Mock.mock({
-    // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
-    'list|1-50': [{
-      // 属性 id 是一个自增数，起始值为 1，每次增 1
-      'id|+1': 1,
-      'name|1': 'name',
-      'price|+8': 10,
-      'count|+2': 0,
-    }]
-  });
-
   export default {
     data() {
       return {
-        list: data.list,
+        list: [],
         showEdit: false,
         editData: {},
         editRules: {
@@ -100,7 +87,16 @@
         !value && this.$refs.editForm.clearValidate();
       },
     },
+    mounted() {
+      this.getList();
+    },
     methods: {
+      getList() {
+        this.$post('/user/getList')
+          .then(json => {
+            this.list = json.data.list;
+          });
+      },
       // 编辑
       handleEdit(row, index) {
         row.index = index;
