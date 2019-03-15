@@ -18,6 +18,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import {$local} from 'common/js/util';
+
   export default {
     data() {
       return {
@@ -44,6 +46,7 @@
             };
             this.$post('/mange/login', reqData)
               .then(json => {
+                $local('userInfo', json.data);
                 this.$router.replace('/goodsList');
               });
           } else {

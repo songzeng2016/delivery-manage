@@ -100,7 +100,16 @@
         !value && this.$refs.editForm.clearValidate();
       },
     },
+    created() {
+      this.getList();
+    },
     methods: {
+      getList() {
+        this.$post('/order/getList')
+          .then(json => {
+            this.list = json.data.list;
+          });
+      },
       // 编辑
       handleEdit(row, index) {
         row.index = index;

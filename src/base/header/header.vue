@@ -2,7 +2,7 @@
   <div class="v-header">
     <div class="companyInfo">
       <img class="logo" src="./logo.png" alt="">
-      <span class="companyName">后台管理系统</span>
+      <span class="companyName">{{userInfo.companyName}}</span>
     </div>
     <el-dropdown placement="bottom">
       <img class="avatar" src="./avatar.jpg" alt="">
@@ -14,7 +14,14 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import {$local} from 'common/js/util';
+
   export default {
+    data() {
+      return {
+        userInfo: $local('userInfo') || {},
+      };
+    },
     methods: {
       logout() {
         this.$post('/mange/logout').then(json => {
