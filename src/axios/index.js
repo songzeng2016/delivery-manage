@@ -1,11 +1,16 @@
 import axios from 'axios';
 import qs from 'qs';
+import router from '../router';
 import {Message} from 'element-ui';
 
 // axios 响应拦截器
 axios.interceptors.response.use(res => {
-  if (res.data.code === '200') {
+  const {code} = res.data;
+  if (code === '200') {
     return res.data;
+  } else if (code === '501') {
+    router.replace('/login');
+    return Promise.reject(new Error(res.data.msg || '请求错误'));
   } else {
     Message({
       showClose: true,
