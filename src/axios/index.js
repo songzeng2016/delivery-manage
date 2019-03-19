@@ -3,6 +3,8 @@ import qs from 'qs';
 import router from '../router';
 import {Message} from 'element-ui';
 
+// axios.defaults.baseURL = 'http://songzeng1994.cn/api';
+
 // axios 响应拦截器
 axios.interceptors.response.use(res => {
   const {code} = res.data;
