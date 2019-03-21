@@ -18,7 +18,7 @@
               <span>数据管理</span>
             </template>
             <el-menu-item index="/goodsList">商品列表</el-menu-item>
-            <el-menu-item index="/sellerList">商家列表</el-menu-item>
+            <el-menu-item index="/sellerList">店铺列表</el-menu-item>
             <el-menu-item index="/orderList">订单列表</el-menu-item>
             <!--<el-menu-item index="/orderList">配送员列表</el-menu-item>-->
           </el-submenu>
@@ -28,7 +28,7 @@
               <span>添加数据</span>
             </template>
             <el-menu-item index="/addGoods">添加商品</el-menu-item>
-            <el-menu-item index="/addSeller">添加商家</el-menu-item>
+            <el-menu-item index="/addSeller">添加店铺</el-menu-item>
             <!--<el-menu-item index="/addSeller">添加配送员</el-menu-item>-->
           </el-submenu>
         </el-menu>

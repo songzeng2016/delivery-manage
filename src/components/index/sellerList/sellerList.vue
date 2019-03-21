@@ -5,17 +5,35 @@
       class="table"
       header-cell-class-name="table-header"
     >
-      <el-table-column
-        label="用户名"
-        prop="account">
+      <el-table-column type="expand">
+        <template slot-scope="props">
+          <el-form label-position="left" inline>
+            <el-form-item label="店铺名称">
+              <span>{{ props.row.store }}</span>
+            </el-form-item>
+            <el-form-item label="负责人">
+              <span>{{ props.row.name }}</span>
+            </el-form-item>
+            <el-form-item label="店铺地址">
+              <span>{{ props.row.address }}</span>
+            </el-form-item>
+            <el-form-item label="电话">
+              <span>{{ props.row.phone }}</span>
+            </el-form-item>
+          </el-form>
+        </template>
       </el-table-column>
       <el-table-column
-        label="密码"
-        prop="password">
+        label="店铺名称"
+        prop="store">
       </el-table-column>
       <el-table-column
-        label="地址"
-        prop="address">
+        label="负责人"
+        prop="name">
+      </el-table-column>
+      <el-table-column
+        label="电话"
+        prop="phone">
       </el-table-column>
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
@@ -41,16 +59,19 @@
         :model="editData"
         :rules="editRules"
         ref="editForm"
-        label-width="60px"
+        label-width="80px"
       >
-        <el-form-item label="名称" prop="name">
+        <el-form-item label="店铺名称" prop="store">
+          <el-input v-model="editData.store"></el-input>
+        </el-form-item>
+        <el-form-item label="负责人" prop="name">
           <el-input v-model="editData.name"></el-input>
         </el-form-item>
-        <el-form-item label="价格" prop="price">
-          <el-input-number :min="0" v-model="editData.price"></el-input-number>
+        <el-form-item label="电话" prop="phone">
+          <el-input v-model="editData.phone"></el-input>
         </el-form-item>
-        <el-form-item label="库存" prop="count">
-          <el-input-number :min="0" v-model="editData.count"></el-input-number>
+        <el-form-item label="店铺地址" prop="address">
+          <el-input v-model="editData.address" type="textarea"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -69,14 +90,17 @@
         showEdit: false,
         editData: {},
         editRules: {
-          name: [
+          store: [
             {required: true, message: '名称不能为空', trigger: 'blur'},
           ],
-          price: [
-            {required: true, message: '价格不能为空', trigger: 'blur'},
+          name: [
+            {required: true, message: '负责人不能为空', trigger: 'blur'},
           ],
-          count: [
-            {required: true, message: '数量不能为空', trigger: 'blur'},
+          phone: [
+            {required: true, message: '电话不能为空', trigger: 'blur'},
+          ],
+          address: [
+            {required: true, message: '地址不能为空', trigger: 'blur'},
           ],
         }
       };
@@ -110,12 +134,11 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
-          this.list.splice(index, 1);
-          console.log(id);
+          this.$post('/user/delete', {id})
+            .then(json => {
+              this.$message();
+              this.list.splice(index, 1);
+            });
         }).catch(() => {
 
         });
@@ -124,9 +147,13 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            const {index} = this.editData;
-            this.list.splice(index, 1, this.editData);
-            this.showEdit = false;
+            this.$post('/user/edit', this.editData)
+              .then(json => {
+                this.$message();
+                const {index} = this.editData;
+                this.list.splice(index, 1, this.editData);
+                this.showEdit = false;
+              });
           }
         });
       },

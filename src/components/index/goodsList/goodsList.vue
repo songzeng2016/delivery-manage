@@ -5,6 +5,24 @@
       class="table"
       header-cell-class-name="table-header"
     >
+      <el-table-column type="expand">
+        <template slot-scope="props">
+          <el-form label-position="left" inline>
+            <el-form-item label="名称">
+              <span>{{ props.row.name }}</span>
+            </el-form-item>
+            <el-form-item label="价格">
+              <span>{{ props.row.price }}</span>
+            </el-form-item>
+            <el-form-item label="详情">
+              <span>{{ props.row.desc }}</span>
+            </el-form-item>
+            <el-form-item label="库存">
+              <span>{{ props.row.count }}</span>
+            </el-form-item>
+          </el-form>
+        </template>
+      </el-table-column>
       <el-table-column
         label="名称"
         prop="name">
@@ -116,7 +134,7 @@
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$post('/goods/delete', this.list[index])
+          this.$post('/goods/delete', {id})
             .then(json => {
               this.$message();
               this.list.splice(index, 1);

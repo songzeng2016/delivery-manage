@@ -20,7 +20,7 @@
       <el-form-item label="描述" prop="desc">
         <el-input type="textarea" v-model="form.desc"></el-input>
       </el-form-item>
-      <el-form-item label="图片">
+      <el-form-item label="图片" required>
         <el-upload
           class="avatar-uploader"
           action=""
@@ -59,6 +59,9 @@
           count: [
             {required: true, message: '数量不能为空', trigger: 'blur'},
           ],
+          desc: [
+            {required: true, message: '数量不能为空', trigger: 'blur'},
+          ],
         }
       };
     },
@@ -70,6 +73,9 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+            if (!this.form.file) {
+              return;
+            }
             const formData = new FormData();
             for (let key in this.form) {
               formData.append(key, this.form[key]);
@@ -79,6 +85,8 @@
               .then(json => {
                 this.$message();
                 this.$refs[formName].resetFields();
+                this.form.file = '';
+                this.imageUrl = '';
               });
           } else {
             console.log('error submit!!');

@@ -1,20 +1,29 @@
 <template>
   <div class="add-container">
-    <p class="title">添加商家</p>
+    <p class="title">添加店铺</p>
     <el-form
       class="add-form"
       :model="form"
       :rules="rules"
       ref="form"
-      label-width="70px"
+      label-width="80px"
     >
-      <el-form-item label="用户名" prop="account">
+      <el-form-item label="账号" prop="account">
         <el-input v-model="form.account"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input v-model="form.password"></el-input>
       </el-form-item>
-      <el-form-item label="地址" prop="address">
+      <el-form-item label="店铺名称" prop="store">
+        <el-input v-model="form.store"></el-input>
+      </el-form-item>
+      <el-form-item label="负责人" prop="name">
+        <el-input v-model="form.name"></el-input>
+      </el-form-item>
+      <el-form-item label="电话" prop="phone">
+        <el-input v-model="form.phone"></el-input>
+      </el-form-item>
+      <el-form-item label="店铺地址" prop="address">
         <el-input v-model="form.address" type="textarea"></el-input>
       </el-form-item>
       <el-form-item>
@@ -31,14 +40,26 @@
         form: {
           account: '',
           password: '',
+          store: '',
+          name: '',
+          phone: '',
           address: '',
         },
         rules: {
           account: [
-            {required: true, message: '用户名不能为空', trigger: 'blur'},
+            {required: true, message: '账号不能为空', trigger: 'blur'},
           ],
           password: [
             {required: true, message: '密码不能为空', trigger: 'blur'},
+          ],
+          store: [
+            {required: true, message: '名称不能为空', trigger: 'blur'},
+          ],
+          name: [
+            {required: true, message: '负责人不能为空', trigger: 'blur'},
+          ],
+          phone: [
+            {required: true, message: '电话不能为空', trigger: 'blur'},
           ],
           address: [
             {required: true, message: '地址不能为空', trigger: 'blur'},

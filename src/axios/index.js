@@ -5,6 +5,8 @@ import {Message} from 'element-ui';
 
 if (process.env.NODE_ENV === 'production') {
   axios.defaults.baseURL = 'http://songzeng1994.cn/api';
+} else {
+  axios.defaults.baseURL = '/api';
 }
 
 // axios 响应拦截器
