@@ -11,6 +11,7 @@ module.exports = {
       .set('common', resolve('src/common'))
       .set('base', resolve('src/base'))
   },
+  assetsDir: 'static',
   // 修改的配置
   devServer: {
     // proxy: 'https://xiaoce-timeline-api-ms.juejin.im',  // 统一配置

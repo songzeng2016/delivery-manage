@@ -1,7 +1,7 @@
 <template>
   <div class="v-header">
     <div class="companyInfo">
-      <img class="logo" src="./logo.png" alt="">
+      <img class="logo" src="./logo.jpg" alt="">
       <span class="companyName">{{userInfo.companyName}}</span>
     </div>
     <el-dropdown placement="bottom">
@@ -42,6 +42,10 @@
     .companyInfo
       display: flex
       align-items: center
+      .logo
+        width: 45px
+        height: 45px
+        margin: 0 10px
       .companyName
         color: white
     .el-dropdown
