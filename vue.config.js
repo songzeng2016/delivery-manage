@@ -5,13 +5,30 @@ function resolve(dir) {
 }
 
 module.exports = {
+  assetsDir: 'static', // js css 相对于 dist 的路径
   chainWebpack(config) {
+    // 移除 prefetch 插件
+    config.plugins.delete('prefetch');
+    // 查看打包体积
+    if (process.env.NODE_ENV === 'production') {
+      config
+        .plugin('webpack-bundle-analyzer')
+        .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
+    }
+    // 配置别名
     config.resolve.alias
       .set('components', resolve('src/components'))
       .set('common', resolve('src/common'))
-      .set('base', resolve('src/base'))
+      .set('base', resolve('src/base'));
   },
-  assetsDir: 'static',
+  configureWebpack: {
+    externals: { // 配置 CDN
+      'vue': 'Vue',
+      'vue-router': 'VueRouter',
+      'axios': 'axios',
+      'element-ui': 'ELEMENT',
+    },
+  },
   // 修改的配置
   devServer: {
     // proxy: 'https://xiaoce-timeline-api-ms.juejin.im',  // 统一配置
